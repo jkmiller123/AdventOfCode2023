@@ -52,7 +52,7 @@ def part1(a_file):
             grab = x.split(",")             # parse out each die
             total_dice_grab = 0             # reset counter
             for y in grab:
-                z = y.split(" ")            # break out the number of that die pulled 
+                z = y.split(" ")            # break out the number of that die pulled
                 thisgrab[z[2]] = z[1]
                 total_dice_grab = total_dice_grab + int(z[1])
                 if int(z[1]) > max_items[z[2]]:   # number of dice per colour exceeds the set maximium
