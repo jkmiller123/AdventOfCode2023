@@ -10,6 +10,7 @@ stage_1 = True    # used for more complex coding changes
 file2read = 'Day01_sample.txt' if testing else 'Day01_01.txt'
 listofwords = ['zerosss', 'one', 'two', 'three', 'four', 'five', 'six', 'seven', 'eight', 'nine']
 listofnumbers = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9']
+d = "one two three four five six seven eight nine".split()
 
 def getTotal(somelines):
         num_lines = re.findall(r'\d+', somelines)
@@ -17,6 +18,12 @@ def getTotal(somelines):
         digit_2 = num_lines[-1][-1]
 
         return digit_1 + digit_2
+def convert(n):
+    if n in d:
+        return str(d.index(n) + 1)
+
+    else :
+        return n
 
 def part_1(a_file):
     # new code "borrowed" for simplistic reading of small files.
@@ -46,13 +53,17 @@ def part_2(a_file):
                 if newsting == x:
                     whichword = listofwords.index(x)
                     newline = newline.replace(x, str(listofnumbers[whichword]),1)
-        print(aline, " - " , newline)
+        # print(aline, " - " , newline)
         digit_combined = getTotal(newline)
-        print(digit_combined)
+        digits = list(map(convert, re.findall(r"(?=(one|two|three|four|five|six|seven|eight|nine|\d))", aline)))
+        if int(digits[0] + digits[-1]) != int(digit_combined):
+            print("not mine = ", int(digits[0] + digits[-1]) , " mine = ", digit_combined , aline   )
+
+        # print(digit_combined)
         running_total = running_total + int(digit_combined)
 
 
-        print("Grand Total for step 2 = ", running_total)
+        # print("Grand Total for step 2 = ", running_total)
 
 # part_1(file2read)   # correct answer is 55123
 part_2(file2read)  # 54751  is too low...  -- 55255 is not correct
